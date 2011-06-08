@@ -15,7 +15,7 @@ Individual Scripts
 
 The scripts are intended to be simple and straightforward to use. This section describes additional configuration when required.
 
-# `chef_server_backup.rb`
+# chef\_server\_backup.rb
 
 This script backs up the following data from the Chef Server.
 
