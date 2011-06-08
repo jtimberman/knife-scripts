@@ -23,9 +23,9 @@ This script backs up the following data from the Chef Server.
 * roles
 * data bags and items
 
-This script will use `.chef/chef_server_backup` as the default directory to backup the data to, but you can change the location by setting `knife[:chef_server_backup]` in `.chef/knife.rb`. For example:
+This script will use `.chef/chef_server_backup` as the default directory to backup the data to, but you can change the location by setting `knife[:chef_server_backup_dir]` in `.chef/knife.rb`. For example:
 
-    knife[:chef_server_backup] = "/home/username/chef_backups"
+    knife[:chef_server_backup_dir] = "/home/username/chef_backups"
 
 Cookbooks are not backed up as they are assumed to already be in the chef-repo and can be uploaded using `knife cookbook upload -a`. Clients are not backed up as they should be reregistered using the validation certificate of the new Opscode Platform organization or other Chef Server.
 
