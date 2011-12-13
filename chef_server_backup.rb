@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+require 'chef/webui_user'
 
 Chef::Config[:solo] = false
 
@@ -29,6 +30,13 @@ class Opscode
       nodes
       roles
       data_bags
+      environments
+      apiclients
+      webusers
+    end
+
+    def environments
+      backup_standard("environments", Chef::Environment)
     end
 
     def nodes
@@ -37,6 +45,14 @@ class Opscode
 
     def roles
       backup_standard("roles", Chef::Role)
+    end
+
+    def apiclients
+      backup_standard("apiclients", Chef::ApiClient)
+    end
+
+    def webusers
+      backup_standard("webusers", Chef::WebUIUser)
     end
 
     def data_bags
