@@ -64,7 +64,7 @@ class Opscode
           Chef::Log.info("Backing up data bag #{bag_name} item #{item_name}")
           item = Chef::DataBagItem.load(bag_name, item_name)
           File.open(File.join(dir, bag_name, "#{item_name}.json"), "w") do |dbag_file|
-            dbag_file.print(item.to_json)
+            dbag_file.print(JSON.pretty_generate(item))
           end
         end
       end
@@ -77,7 +77,7 @@ class Opscode
         Chef::Log.info("Backing up #{component} #{component_name}")
         component_obj = klass.load(component_name)
         File.open(File.join(dir, "#{component_name}.json"), "w") do |component_file|
-          component_file.print(component_obj.to_json)
+          component_file.print(JSON.pretty_generate(component_obj))
         end
       end
     end
