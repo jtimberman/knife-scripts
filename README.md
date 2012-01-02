@@ -17,27 +17,12 @@ The scripts are intended to be simple and straightforward to use. This section d
 
 # chef\_server\_backup.rb
 
-This script backs up the following data from the Chef Server.
-
-* nodes
-* roles
-* data bags and items
-
-This script will use `.chef/chef_server_backup` as the default directory to backup the data to, but you can change the location by setting `knife[:chef_server_backup_dir]` in `.chef/knife.rb`. For example:
-
-    knife[:chef_server_backup_dir] = "/home/username/chef_backups"
-
-Cookbooks are not backed up as they are assumed to already be in the chef-repo and can be uploaded using `knife cookbook upload -a`. Clients are not backed up as they should be reregistered using the validation certificate of the new Opscode Platform organization or other Chef Server.
-
-Bugs
-====
-
-See [How to Contribute](wiki.opscode.com/display/chef/How+to+Contribute) to Opscode projects if you encounter a bug with these scripts and would like to contribute a fix.
+This script is deprecated. You should look at [Steven Danna's knife hacks](https://github.com/stevendanna/knife-hacks/) for the `backup_export.rb` and `backup_restore.rb` plugins.
 
 Copyright and License
 ====
 
-Copyright: 2011, Joshua Timberman (<joshua@opscode.com>)
+Copyright: 2011, Joshua Timberman (<opensource@housepub.org>)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
