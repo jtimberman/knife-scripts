@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+require 'chef/webui_user'
 
 Chef::Config[:solo] = false
 
@@ -29,6 +30,13 @@ class Opscode
       nodes
       roles
       data_bags
+      environments
+      apiclients
+      webusers
+    end
+
+    def environments
+      backup_standard("environments", Chef::Environment)
     end
 
     def nodes
@@ -37,6 +45,14 @@ class Opscode
 
     def roles
       backup_standard("roles", Chef::Role)
+    end
+
+    def apiclients
+      backup_standard("apiclients", Chef::ApiClient)
+    end
+
+    def webusers
+      backup_standard("webusers", Chef::WebUIUser)
     end
 
     def data_bags
@@ -48,7 +64,7 @@ class Opscode
           Chef::Log.info("Backing up data bag #{bag_name} item #{item_name}")
           item = Chef::DataBagItem.load(bag_name, item_name)
           File.open(File.join(dir, bag_name, "#{item_name}.json"), "w") do |dbag_file|
-            dbag_file.print(item.to_json)
+            dbag_file.print(JSON.pretty_generate(item))
           end
         end
       end
@@ -61,7 +77,7 @@ class Opscode
         Chef::Log.info("Backing up #{component} #{component_name}")
         component_obj = klass.load(component_name)
         File.open(File.join(dir, "#{component_name}.json"), "w") do |component_file|
-          component_file.print(component_obj.to_json)
+          component_file.print(JSON.pretty_generate(component_obj))
         end
       end
     end
